@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
 import AddTodo from './components/addTodo';
@@ -19,12 +19,19 @@ export default function App() {
   } 
 
   const sumbitHandler = (text) =>{
-    myfunction1((prevTodos)=>{
-      return [
-        {text:text, key: Math.random().toString()},
-        ...prevTodos
-      ]
-    })
+
+    if(text.length > 3){
+      myfunction1((prevTodos)=>{
+        return [
+          {text:text, key: Math.random().toString()},
+          ...prevTodos
+        ]
+      })
+    }else{
+      Alert.alert('OOPS!', 'el texto debe ser mayor a 3',[
+        {text:'Understood', onPress:()=>console.log('Alert closed')}
+      ])
+    }    
   }
 
   return (
